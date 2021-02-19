@@ -1,0 +1,1 @@
+# rabbitmq-apache-camel-example

@@ -1,0 +1,37 @@
+server:
+  servlet:
+    context-path: /consumer-person
+
+spring:
+  application.name: consumer-person
+
+application:
+  rabbitmq:
+    queues:
+      person: rabbitmq:personExchange?queue=person&concurrentConsumers=20&threadPoolSize=20&prefetchCount=10&prefetchSize=0&prefetchGlobal=false&prefetchEnabled=true
+
+camel:
+  component:
+    rabbitmq:
+      host: localhost
+      port: 5672
+      username: admin
+      password: admin
+      channel-pool-max-size: 20
+      durable: true
+      auto-delete: false
+      auto-ack: false
+  health:
+    enabled: true
+    check:
+      routes:
+        enabled: true
+  springboot:
+    main-run-controller: true
+    name: consumer-person
+
+
+management:
+  info:
+    camel:
+      enabled: true
